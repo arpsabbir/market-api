@@ -1,0 +1,23 @@
+web:
+  build: ./docker/dev
+  command: ./docker/dev/start.sh
+  volumes:
+    - .:/usr/src/app
+  volumes_from:
+    - bundler-cache
+  ports:
+    - "3000:3000"
+  links:
+    - db
+  env_file:
+    - .env
+bundler-cache:
+  image: ruby:2.2
+  command: /bin/true
+  volumes:
+    - /var/lib/bundle
+db:
+  image: postgres
+  ports:
+    - "5432"
+
