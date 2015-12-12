@@ -30,6 +30,9 @@ gem 'puma', '~> 2.13.4'
 
 group :development, :test do
   gem 'minitest-reporters', '~> 1.1.0'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'factory_girl_rails', '~> 4.5'
+  gem 'ffaker', '~> 2.1'
 end
 
 group :development do
