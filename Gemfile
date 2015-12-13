@@ -28,6 +28,10 @@ gem 'pg', '~> 0.18.3'
 # use puma as application server
 gem 'puma', '~> 2.13.4'
 
+# api gem
+gem 'active_model_serializers', '~> 0.9.3'
+gem 'devise', '~> 3.5', '>= 3.5.3'
+
 group :development, :test do
   gem 'minitest-reporters', '~> 1.1.0'
   gem 'rspec-rails', '~> 3.4'

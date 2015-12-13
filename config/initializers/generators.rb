@@ -8,5 +8,5 @@ Rails.application.config.generators do |g|
   g.helper = false
 end
 
-Rails.application.config.autoload_paths += %W(\#{config.route}/lib)
+Rails.application.config.autoload_paths += %W(\#{config.root}/lib)
 
