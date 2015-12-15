@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :controller do
-  
+  let(:user) { FactoryGirl.create :user } 
+ 
   describe "GET #show" do
     before(:each) do
-      @user = FactoryGirl.create :user
-      get :show, id: @user.id
+      get :show, id: user.id
     end
 
     it "returns the information about reporter on a hash" do
       user_response = json_response
-      expect(user_response[:email]).to eql @user.email
+      expect(user_response[:email]).to eql user.email
     end
 
     it { should respond_with 200 }
@@ -52,11 +52,11 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   end
 
   describe "PUT/PATCH #update" do
-    
+    before(:each) { request.headers['Authorization'] = user.auth_token }
+
     context "when is successfully updated" do
       before(:each) do
-        @user = FactoryGirl.create :user
-        patch :update, { id: @user.id, user: { email: "newemail@example.com" } }
+        patch :update, { id: user.id, user: { email: "newemail@example.com" } }
       end
 
       it "renders the json representation for the updated user" do
@@ -69,8 +69,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
     context "when is not created" do
       before(:each) do
-        @user = FactoryGirl.create :user
-        patch :update, { id: @user.id, user: { email: "bademail.com" } }
+        patch :update, { id: user.id, user: { email: "bademail.com" } }
       end
 
       it "renders errors" do
@@ -89,8 +88,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe "DELETE #destroy" do
     before(:each) do
-      @user = FactoryGirl.create :user
-      delete :destroy, { id: @user.id }
+      request.headers['Authorization'] = user.auth_token
+      delete :destroy, { id: user.id }
     end
     
     it { should respond_with 204 }

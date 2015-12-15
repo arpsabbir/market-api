@@ -33,7 +33,27 @@ describe Authenticable do
       expect(json_response[:errors]).to eql "Not authenticated"
     end
 
-    it { should respond_with 401 }
+    it { is_expected.to respond_with 401 }
+  end
+
+  describe "#user_signed_in?" do
+    let(:user) { FactoryGirl.create :user } 
+
+    context "when there is a user on 'session'" do
+      before do
+        authentication.stub(:current_user).and_return(user)
+      end
+
+      it { expect(authentication.user_signed_in?).to eql true }
+    end
+
+    context "when there is no user on 'session'" do
+      before do
+        authentication.stub(:current_user).and_return(nil)
+      end
+
+      it { expect(authentication.user_signed_in?).to eql false }
+    end
   end
   
 end
