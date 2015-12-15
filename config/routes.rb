@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     scope module: :v1, constraints: ApiConstraints.new(vesion: 1, default: true) do
     # Resources listed here
       resources :users, :only => [:show, :create, :update, :destroy]
+      resources :sessions, :only => [:create, :destroy]
     end
   end
 end
