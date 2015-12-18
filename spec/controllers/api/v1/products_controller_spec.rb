@@ -9,6 +9,10 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
       expect(json_response[:product][:title]).to eql product.title
     end
 
+    it "returns the infromation with a user embedded" do
+      expect(json_response[:product][:user][:email]).to eql product.user.email
+    end
+
     it { is_expected.to respond_with 200 }
   end
 
@@ -20,6 +24,10 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
 
     it "returns 4 records" do
       expect(json_response[:products].count).to be 4
+    end
+
+    it "returns products with user embedded" do
+      json_response[:products].each { |product| expect { product[:user].to be present } }
     end
 
     it { is_expected.to respond_with 200 }
