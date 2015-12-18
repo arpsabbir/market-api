@@ -6,7 +6,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
     before { get :show, id: product.id }
 
     it "returns the information about a reporter on a hash" do
-      expect(json_response[:title]).to eql product.title
+      expect(json_response[:product][:title]).to eql product.title
     end
 
     it { is_expected.to respond_with 200 }
@@ -35,7 +35,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
       end
 
       it "renders the json reprentation for the product record just created" do
-        expect(json_response[:title]).to eql product_attributes[:title]
+        expect(json_response[:product][:title]).to eql product_attributes[:title]
       end
 
       it { is_expected.to respond_with 201 }
@@ -68,7 +68,7 @@ RSpec.describe Api::V1::ProductsController, type: :controller do
                                 product: { title: "An TV" } } }
 
       it "renders the json reprentation for the updated user" do
-        expect(json_response[:title]).to eql "An TV"
+        expect(json_response[:product][:title]).to eql "An TV"
       end
 
       it { is_expected.to respond_with 200 }
