@@ -4,4 +4,11 @@ class Product < ActiveRecord::Base
                     presence: true
 
   belongs_to :user
+
+  scope :filter_by_title, lambda { |key| 
+    where("lower(title) LIKE ?", "%#{key.downcase}%" )
+  }
+  scope :above_or_equal_to_price, lambda { |price| where("price >= ?", price) }
+  scope :below_or_equal_to_price, lambda { |price| where("price <= ?", price) }
+  scope :recent, -> { order(:updated_at) }
 end
