@@ -13,6 +13,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(user_response[:email]).to eql user.email
     end
 
+    it "has the product ids embedded into the user" do
+      expect(json_response[:user][:product_ids]).to eql []
+    end
+
     it { should respond_with 200 }
   end
 

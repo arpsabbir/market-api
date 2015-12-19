@@ -29,7 +29,7 @@ gem 'pg', '~> 0.18.3'
 gem 'puma', '~> 2.13.4'
 
 # api gem
-gem 'active_model_serializers', '~> 0.9.3'
+gem 'active_model_serializers', '~> 0.8.3'
 gem 'devise', '~> 3.5', '>= 3.5.3'
 
 group :development, :test do
