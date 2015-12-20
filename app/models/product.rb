@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
                     presence: true
 
   belongs_to :user
+  has_many :placements
+  has_many :orders, through: :placements
 
   scope :filter_by_title, lambda { |key| 
     where("lower(title) LIKE ?", "%#{key.downcase}%" )
