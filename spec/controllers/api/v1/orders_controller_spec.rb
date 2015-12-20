@@ -17,7 +17,8 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
   end
 
   describe "GET #show" do
-    let(:order) { FactoryGirl.create :order, user: current_user } 
+    let(:product) { FactoryGirl.create :product } 
+    let(:order) { FactoryGirl.create :order, user: current_user, product_ids: [product.id] } 
     before do
       get :show, user_id: current_user.id, id: order.id
     end
@@ -27,6 +28,9 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
     end
 
     it { is_expected.to respond_with 200 }
+
+    it { expect(json_response[:order][:total]).to eql order.total.to_s }
+    it { expect(json_response[:order][:products].count).to eql 1}
   end
 
   describe "POST #create" do
