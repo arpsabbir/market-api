@@ -28,4 +28,19 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
 
     it { is_expected.to respond_with 200 }
   end
+
+  describe "POST #create" do
+    let(:product1) { FactoryGirl.create :product } 
+    let(:product2) { FactoryGirl.create :product } 
+    before do
+      order_params =  { product_ids: [product1.id, product2.id]}
+      post :create, user_id: current_user.id, order: order_params
+    end
+
+    it "returns the order record" do
+      expect(json_response[:order][:id]).to be_present
+    end
+
+    it { should respond_with 201 }
+  end
 end
