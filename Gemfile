@@ -38,6 +38,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.5'
   gem 'ffaker', '~> 2.1'
   gem 'shoulda-matchers', '~> 3.0', '>= 3.0.1'
+  gem 'email_spec', '~> 1.6'
 end
 
 group :development do
