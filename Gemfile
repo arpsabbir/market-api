@@ -32,6 +32,9 @@ gem 'puma', '~> 2.13.4'
 gem 'active_model_serializers', '~> 0.8.3'
 gem 'devise', '~> 3.5', '>= 3.5.3'
 
+# pagination
+gem 'kaminari', '~> 0.16.3'
+
 group :development, :test do
   gem 'minitest-reporters', '~> 1.1.0'
   gem 'rspec-rails', '~> 3.4'
