@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   validates :user_id, presence: true
+  validates_with EnoughProductsValidator
   before_validation :set_total!
   belongs_to :user
 
