@@ -16,10 +16,17 @@ RSpec.describe Order, type: :model do
 
   describe "#set_total!" do
     let(:product1) { FactoryGirl.create :product, price: 100 }
-    let(:product2) { FactoryGirl.create :product, price: 99 }
-    let(:order) { FactoryGirl.build :order, product_ids: [product1.id, product2.id] }
+    let(:product2) { FactoryGirl.create :product, price: 90 }
+
+    let(:placement1) { FactoryGirl.build :placement, product: product1, quantity: 3 } 
+    let(:placement2) { FactoryGirl.build :placement, product: product2, quantity: 15 }
+
+    let(:order) { FactoryGirl.build :order } 
+
     it "returns the total amount to pay" do
-      expect{order.set_total!}.to change{order.total}.from(0).to(199)
+      order.placements << placement1
+      order.placements << placement2
+      expect{order.set_total!}.to change{order.total}.from(0).to(1650)
     end
   end
 
