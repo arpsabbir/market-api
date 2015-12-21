@@ -13,6 +13,8 @@ RSpec.describe Api::V1::OrdersController, type: :controller do
       expect(json_response[:orders].size).to eql 4
     end
 
+    it_behaves_like "paginated list"
+ 
     it { is_expected.to respond_with 200 }
   end
 
