@@ -32,6 +32,10 @@ gem 'puma', '~> 2.13.4'
 gem 'active_model_serializers', '~> 0.8.3'
 gem 'devise', '~> 3.5', '>= 3.5.3'
 
+# delayed job for background jobs
+gem 'delayed_job', '~> 4.1', '>= 4.1.1'
+gem 'delayed_job_active_record', '~> 4.1'
+
 # pagination
 gem 'kaminari', '~> 0.16.3'
 

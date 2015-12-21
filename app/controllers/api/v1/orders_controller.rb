@@ -17,7 +17,7 @@ class Api::V1::OrdersController < ApplicationController
 
     if order.save
       order.reload
-      OrderMailer.send_confirmation(order).deliver_now
+      OrderMailer.send_confirmation(order).deliver_later!
       render json: order, status: 201, location: [:api, current_user, order]
     else
       render json: { errors: order.errors }, status: 422
